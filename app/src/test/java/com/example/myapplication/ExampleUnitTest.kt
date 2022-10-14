@@ -208,4 +208,21 @@ class ExampleUnitTest
         delay(1000)
         println("done testing.")
     }
+
+    @Test
+    fun test11() = runBlocking {
+        println("start testing...")
+        val request = launch {
+            repeat(3) { i ->
+                println("launching new coroutine...${i}")
+                launch {
+                    delay((i + 1) * 200L)
+                    println("Coroutine $i is done.")
+                }
+            }
+            println("request: I'm done and I don't' explicitly join my children that are still active.")
+        }
+        request.join()
+        println("end of testing.")
+    }
 }
