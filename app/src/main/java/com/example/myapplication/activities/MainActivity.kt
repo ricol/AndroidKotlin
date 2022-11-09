@@ -1,21 +1,28 @@
-package com.example.myapplication
+package com.example.myapplication.activities
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity()
+class MyViewModel: ViewModel()
+{
+}
+
+class MainActivity : BaseActivity()
 {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    val model: MyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -23,7 +30,6 @@ class MainActivity : AppCompatActivity()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -31,7 +37,9 @@ class MainActivity : AppCompatActivity()
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+//            startActivity(Intent(this, SecondActivity::class.java).apply { putExtra("name", "wangxinghe") })
+            startActivity(Intent(this, ThirdActivity::class.java).apply { putExtra("name", "wangxinghe") })
         }
     }
 

@@ -1,17 +1,19 @@
-package com.example.myapplication
+package com.example.myapplication.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentFirstBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment()
+class FirstFragment : BaseFragment()
 {
 
     private var _binding: FragmentFirstBinding? = null
@@ -33,6 +35,10 @@ class FirstFragment : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
+            setFragmentResultListener("data") { r, b ->
+                val result = b.get("name") as String
+                println("result: $result, r: $r")
+            }
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
